@@ -1,6 +1,5 @@
 rebateControllers.controller('HeaderController', ['$scope', '$http','commonServices','broadcastService','CONSTANTS','$timeout', function ($scope,$http,commonServices,broadcastService,CONSTANTS,$timeout) {
-     
-     //$scope.loggedIn = "NO";
+
      $scope.$on('handleBroadcast', function() {
         
         /*$scope.$apply(function () {
@@ -15,6 +14,23 @@ rebateControllers.controller('HeaderController', ['$scope', '$http','commonServi
          })
         
      });
+
+
+    $scope.$on('handleBroadcastForLoginAttributes', function() {
+
+        /*$scope.$apply(function () {
+            $scope.loggedIn = broadcastService.token;
+            console.log('HeaderControoler : ' + $scope.loggedIn);
+        }); */
+
+         $timeout(function() {
+             $scope.loginAttribute = broadcastService.loginAttributes;
+            console.log('HeaderControoler for broadcast : ' + $scope.loginAttribute);
+         })
+
+     });
+
+
      $scope.signOut = function() {
         console.log('sign out trigerred');
         var auth2 = gapi.auth2.getAuthInstance();
@@ -30,7 +46,8 @@ rebateControllers.controller('HeaderController', ['$scope', '$http','commonServi
 
              $scope.signoutUserPromise.success(function (data, status, headers, config) {
                  console.log(data);
-                 broadcastService.prepForBroadcast("");
+                 broadcastService.broadcastItem('');
+                 broadcastService.clearCache();
              }).error(function (data, status, headers, config) {
                     console.log('AWS DOWN');
              });

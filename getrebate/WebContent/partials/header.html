@@ -12,7 +12,10 @@
                         <a data-target=".form-wrapper" data-toggle="modal" href="javascript:void(0);"><i class="fa fa-user"></i> <span>Login/Register</span></a>
                     </li>
                     <li class="dropdown langs" ng-if="loggedIn">
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i> <span>UserName </span> <i class="fa fa-caret-down"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i>
+                            <span>Welcome {{loginAttribute.name | limitTo: 9 | uppercase }}{{loginAttribute.name.length > 9 ? '...' : ''}} </span>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a href="#/rebate/userprofile/edit">Redeem Points</a></li>
                             <li><a ng-click="signOut()">Logout</a></li>

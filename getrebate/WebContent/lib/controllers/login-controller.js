@@ -31,11 +31,12 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
             };
         $scope.loginUserURL = CONSTANTS.LOGIN_URL;
         console.log(parameter);
-        broadcastService.prepForBroadcast("YES");
         $scope.loginUserPromise = commonServices.sendHttpRequest($scope.loginUserURL,CONSTANTS.POST_METHOD, parameter);
          
          $scope.loginUserPromise.success(function (data, status, headers, config) {
              broadcastService.prepForBroadcast(data.token);
+             console.log('User Details : ' + data.userDetails);
+             broadcastService.prepForBroadcastOfLoginAttributes(data.userDetails);
              console.log(data);
              $scope.dismiss();       //dismiss modal
              
@@ -61,6 +62,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
          $scope.loginUserPromise.success(function (data, status, headers, config) {
              console.log(data);
              broadcastService.prepForBroadcast(data.token);
+             broadcastService.prepForBroadcastOfLoginAttributes(data.userDetails);
              $scope.dismiss();       //dismiss modal
          }).error(function (data, status, headers, config) {
                 console.log('AWS DOWN');
@@ -87,6 +89,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
          $scope.registerUserPromise.success(function (data, status, headers, config) {
              console.log(data);
              broadcastService.prepForBroadcast(data.token);
+             broadcastService.prepForBroadcastOfLoginAttributes(data.userDetails);
              $scope.dismiss();       //dismiss modal
          }).error(function (data, status, headers, config) {
                 console.log('AWS DOWN');

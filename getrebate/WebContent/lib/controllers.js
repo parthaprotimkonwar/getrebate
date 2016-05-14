@@ -23,25 +23,30 @@ rebateControllers.factory('broadcastService', function($rootScope) {
    
     var broadcastObject = {};
     broadcastObject.token = '';
-    //broadcastObject.loginAttributes = {};
+    broadcastObject.loginAttributes = {};
     
     broadcastObject.prepForBroadcast = function(token) {
         broadcastObject.token = token;
         this.broadcastItem();
     };
     
-    /*broadcastObject.prepForBroadcastOfLoginAttributes = function(loginAttributes) {
+    broadcastObject.prepForBroadcastOfLoginAttributes = function(loginAttributes) {
         broadcastObject.loginAttributes = loginAttributes;
         this.broadcastLoginAttributes();
-    };*/
+    };
+
+    broadcastObject.clearCache = function() {
+        broadcastObject.token = '';
+        broadcastObject.loginAttributes = {};
+    }
     
     broadcastObject.broadcastItem = function() {
         $rootScope.$broadcast('handleBroadcast');
     };
     
-    /*broadcastObject.broadcastLoginAttributes = function() {
+    broadcastObject.broadcastLoginAttributes = function() {
         $rootScope.$broadcast('handleBroadcastForLoginAttributes');
-    };*/
+    };
     
     return broadcastObject;
 });
