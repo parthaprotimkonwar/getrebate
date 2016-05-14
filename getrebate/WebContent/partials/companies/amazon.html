@@ -48,8 +48,16 @@
                                         <input type="text" name="quantity" value="1" title="Qty" class="input-text qty">
                                     </p>-->
                                     <p class="thumb-act thumb-act-more">
-                                        <a class="btn-cart" ng-if="loggedIn" ng-click="redirectToPageWithTrasnsactionID(CONSTANTS.AMAZON_REDIRECT_URL)"><i class="fa fa-shopping-cart"></i> <span>Go to Amazon.com</span></a>
-                                        <a href="#" class="btn-cart" ng-if="!loggedIn"><i class="fa fa-shopping-cart"></i> <span>Login to get Cashback</span></a>
+                                        <a class="btn-cart" ng-if="loggedIn" ng-click="redirectToPageWithTrasnsactionID(CONSTANTS.AMAZON_REDIRECT_URL)">
+                                            <i class="fa fa-shopping-cart"></i> <span>Go to Amazon.com</span>
+                                        </a>
+
+                                        <a data-target=".form-wrapper" data-toggle="modal" href="javascript:void(0);" class="btn-cart" ng-if="!loggedIn">
+                                            <i class="fa fa-shopping-cart"></i> <span>Login to get Cashback</span>
+                                        </a>
+
+
+                                        <!--<a href="#" class="btn-cart" ng-if="!loggedIn"><i class="fa fa-shopping-cart"></i> <span>Login to get Cashback</span></a>-->
                                         <!--<a href="#"><i class="fa fa-heart-o"></i></a>
                                         <a href="#"><i class="fa fa-exchange"></i></a>-->
                                     </p>
