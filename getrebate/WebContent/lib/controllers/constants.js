@@ -8,6 +8,7 @@ mainApp.service('CONSTANTS', function(){
     this.LOGOUT_URL = this.BASE_URL + 'logout';
     this.SIGNUP_URL = this.BASE_URL + 'signup';
     this.TRANSACTION_GENERATION_URL = this.BASE_URL + 'usertransaction';
+    this.USER_POINTS_URL = this.BASE_URL + 'userpoints';
 
 
     this.AMAZON_REDIRECT_URL = 'http://www.amazon.in/?tag=getrebate-21&ascsubtag=';

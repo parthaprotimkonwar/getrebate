@@ -6,7 +6,7 @@
     var myApp = angular.module('myApp', []);
     Here myApp is the name of the namespace and [] contains the dependecy services which need to be injected in the module.
 */
-var rebateControllers = angular.module('rebateControllers', []).directive('myModal', function() {
+var rebateControllers = angular.module('rebateControllers', ['ngAnimate']).directive('myModal', function() {
                                                                        return {
                                                                          restrict: 'A',
                                                                          link: function(scope, element, attr) {
@@ -27,18 +27,30 @@ rebateControllers.factory('broadcastService', function($rootScope) {
     
     broadcastObject.prepForBroadcast = function(token) {
         broadcastObject.token = token;
+        localStorage.setItem("broadcastObject", JSON.stringify(broadcastObject));
         this.broadcastItem();
     };
     
     broadcastObject.prepForBroadcastOfLoginAttributes = function(loginAttributes) {
         broadcastObject.loginAttributes = loginAttributes;
+        localStorage.setItem("broadcastObject", JSON.stringify(broadcastObject));
         this.broadcastLoginAttributes();
     };
 
     broadcastObject.clearCache = function() {
         broadcastObject.token = '';
         broadcastObject.loginAttributes = {};
-    }
+    };
+
+    broadcastObject.isEmpty = function() {
+        /*console.log('*** token length' + broadcastObject.token.length);
+        console.log('*** login attr length' + Object.keys(broadcastObject.loginAttributes).length);*/
+        if(broadcastObject.token.length == 0 && Object.keys(broadcastObject.loginAttributes).length == 0){
+            return true;
+        }
+
+        return false;
+    };
     
     broadcastObject.broadcastItem = function() {
         $rootScope.$broadcast('handleBroadcast');

@@ -108,6 +108,8 @@
 
                         </div>-->
                         <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
                             <div class="featured-box featured-box-secondary">
                                 <div class="box-content">
                                     <h4>Redeem Points</h4>
@@ -119,7 +121,10 @@
                                                     <span class="quantity"></span>
                                                 </th>
                                                 <td class="product-price">
-                                                    <span class="amount">Partha Protim Konwar</span>
+                                                    <span class="amount">
+                                                        {{loginAttribute.name | uppercase}}
+                                                        <!--Partha Protim Konwar-->
+                                                    </span>
                                                 </td>
                                             </tr>
                                             <!--<tr class="cart_table_item">
@@ -152,17 +157,17 @@
                                                     Total Points
                                                 </th>
                                                 <td class="product-price">
-                                                    <strong><span class="amount">$431</span></strong>
+                                                    <strong><span class="amount">&#8377; {{points.value}}</span></strong>
                                                 </td>
                                             </tr>
                                         </tbody> 
                                     </table>
                                     <p>
-                                            <input type="submit" value="Redeem Points" class="btn btn-primary btn-block" data-loading-text="Loading...">
+                                            <input type="submit" ng-click="redeemPoints()" value="Redeem Points" class="btn btn-primary btn-block" data-loading-text="Loading...">
                                         </p>
-                                    <div class="panel-body"> 
-                                                    <p>You can only redeem after accumulation of 150 points.</p>
-                                                </div>
+                                    <div class="panel-body" ng-if="points.message">
+                                        <p>{{points.message}}</p>
+                                    </div>
                                     <!--<h4>Edit Profile</h4>
                                     <div class="panel-group panel-group2" id="accordion">
                                         <div class="panel panel-default">
