@@ -25,6 +25,11 @@ rebateControllers.factory('broadcastService', function($rootScope) {
     broadcastObject.token = '';
     broadcastObject.loginAttributes = {};
     
+    broadcastObject.init = function(thatBroadcastObject) {
+        broadcastObject.token = thatBroadcastObject.token;
+        broadcastObject.loginAttributes = thatBroadcastObject.loginAttributes;
+    };
+
     broadcastObject.prepForBroadcast = function(token) {
         broadcastObject.token = token;
         localStorage.setItem("broadcastObject", JSON.stringify(broadcastObject));
@@ -40,15 +45,15 @@ rebateControllers.factory('broadcastService', function($rootScope) {
     broadcastObject.clearCache = function() {
         broadcastObject.token = '';
         broadcastObject.loginAttributes = {};
+        this.broadcastItem();
+        this.broadcastLoginAttributes();
+        localStorage.setItem("broadcastObject", JSON.stringify(broadcastObject));
     };
 
     broadcastObject.isEmpty = function() {
-        /*console.log('*** token length' + broadcastObject.token.length);
-        console.log('*** login attr length' + Object.keys(broadcastObject.loginAttributes).length);*/
         if(broadcastObject.token.length == 0 && Object.keys(broadcastObject.loginAttributes).length == 0){
             return true;
         }
-
         return false;
     };
     

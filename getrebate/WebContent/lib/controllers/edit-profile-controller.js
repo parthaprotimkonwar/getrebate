@@ -46,5 +46,5 @@ rebateControllers.controller('EditProfileController', ['$scope', '$http','$windo
 
         //$timeout(function () { $scope.points.message = ""; }, 3000);
     };
-
+    //END function for redeem of points.
 }]);

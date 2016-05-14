@@ -1,5 +1,11 @@
 rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http','$window','$location','broadcastService', 'commonServices','CONSTANTS', function($scope,$rootScope,$http,$window,$location,broadcastService,commonServices,CONSTANTS) {
 
+    //Handle condition when broadcast is empty
+    /*if(broadcastService.isEmpty()) {
+        broadcastService = JSON.parse(localStorage.getItem("broadcastObject"));
+    }*/
+    //END Condition for broadcast empty
+
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         /*console.log('ID: ' + profile.getId());
@@ -15,7 +21,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
     
     $scope.$on('handleBroadcast', function() {
         $scope.loggedIn = broadcastService.token;
-        console.log('G+Controoler : ' + $scope.loggedIn);
+        console.log('login controller : ' + $scope.loggedIn);
     }); 
 
     

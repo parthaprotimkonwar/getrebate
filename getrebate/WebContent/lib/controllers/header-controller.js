@@ -1,29 +1,39 @@
 rebateControllers.controller('HeaderController', ['$scope', '$http','commonServices','broadcastService','CONSTANTS','$timeout', function ($scope,$http,commonServices,broadcastService,CONSTANTS,$timeout) {
 
-     $scope.$on('handleBroadcast', function() {
+    //$scope.broadcastServiceData = broadcastService;
+    //Handle condition when broadcast is empty
+    if(broadcastService.isEmpty()) {
+        var broadcastObject = JSON.parse(localStorage.getItem("broadcastObject"));
+        console.log('broadcast object = ' + JSON.stringify(broadcastObject));
+        broadcastService.init(broadcastObject);
+    }
+    //END Condition for broadcast empty
+
+
+
+    $scope.loggedIn = broadcastService.token;
+    $scope.loginAttribute = broadcastService.loginAttributes;
+    $scope.$on('handleBroadcast', function() {
         
         /*$scope.$apply(function () {
             $scope.loggedIn = broadcastService.token;
             console.log('HeaderControoler : ' + $scope.loggedIn);
         }); */
          
-         $timeout(function() {
-              // anything you want can go here and will safely be run on the next digest.
-             $scope.loggedIn = broadcastService.token;
-            console.log('HeaderControoler : ' + $scope.loggedIn);
-         })
+     $timeout(function() {
+            // anything you want can go here and will safely be run on the next digest.
+            //broadcastService = JSON.parse(localStorage.getItem("broadcastObject"));
+        $scope.loggedIn = broadcastService.token;
+        console.log('HeaderControoler : ' + $scope.loggedIn);
+     })
         
-     });
+    });
 
 
     $scope.$on('handleBroadcastForLoginAttributes', function() {
 
-        /*$scope.$apply(function () {
-            $scope.loggedIn = broadcastService.token;
-            console.log('HeaderControoler : ' + $scope.loggedIn);
-        }); */
-
          $timeout(function() {
+             //broadcastService = JSON.parse(localStorage.getItem("broadcastObject"));
              $scope.loginAttribute = broadcastService.loginAttributes;
             console.log('HeaderControoler for broadcast : ' + $scope.loginAttribute);
          })
@@ -46,7 +56,6 @@ rebateControllers.controller('HeaderController', ['$scope', '$http','commonServi
 
              $scope.signoutUserPromise.success(function (data, status, headers, config) {
                  console.log(data);
-                 broadcastService.broadcastItem('');
                  broadcastService.clearCache();
              }).error(function (data, status, headers, config) {
                     console.log('AWS DOWN');
