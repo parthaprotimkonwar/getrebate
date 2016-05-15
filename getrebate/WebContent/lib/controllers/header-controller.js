@@ -5,7 +5,9 @@ rebateControllers.controller('HeaderController', ['$scope', '$http','commonServi
     if(broadcastService.isEmpty()) {
         var broadcastObject = JSON.parse(localStorage.getItem("broadcastObject"));
         console.log('broadcast object = ' + JSON.stringify(broadcastObject));
-        broadcastService.init(broadcastObject);
+        if(broadcastObject != null) {
+            broadcastService.init(broadcastObject);
+        }
     }
     //END Condition for broadcast empty
 
