@@ -117,25 +117,43 @@
                             
                         </div>
                         <div id="register" class="tab-pane">
-                            <form class="form-block" role="form">
+                            <div ng-if="registerError" class="alert alert-danger fade in">
+                                <strong>Sorry!</strong> {{registerErrorMessage}}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            </div>
+
+                            <form name="register_form" class="form-block" role="form">
                                 <div class="text-center">
                                     <h2>I'm new here</h2>
-                                   <!-- <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
                                 </div>
-                                <div class="form-group">
+                                <!--Name TextField-->
+                                <div ng-class="{'form-group' : true, 'has-feedback': true, 'has-success' : register_form.name.$valid && register_form.name.$dirty, 'has-error' : !register_form.name.$valid && register_form.name.$dirty}">
                                     <label for="name" class="control-label sr-only">Name</label>
-                                    <input type="text" ng-model="register.name" class="form-control" id="name" placeholder="Name">
+                                    <input ng-maxlength="30" type="text" ng-model="register.name" class="form-control" name="name" id="name" placeholder="Name" required>
+                                    <span ng-if="register_form.name.$valid && register.name.length > 0" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    <span ng-if="!register_form.name.$valid && register_form.name.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 </div>
-                                <div class="form-group">
+
+                                <!--Email TextField-->
+                                <!--<div class="form-group has-success has-feedback">-->
+                                <div ng-class="{'form-group' : true, 'has-feedback': true, 'has-success' : register_form.resemail.$valid && register_form.resemail.$dirty, 'has-error' : !register_form.resemail.$valid && register_form.resemail.$dirty}">
                                     <label for="resemail" class="control-label sr-only">Email</label>
-                                    <input type="email" ng-model="register.email" class="form-control" id="resemail" placeholder="Email">
+                                    <input ng-maxlength="30" type="email" ng-model="register.email" class="form-control" name="resemail" id="resemail" placeholder="Email" required="true">
+                                    <span ng-if="register_form.resemail.$valid && register.email.length > 0" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    <span ng-if="!register_form.resemail.$valid && register_form.resemail.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 </div>
-                                <div class="form-group">
+
+                                <!--Password TextField-->
+                                <div ng-class="{'form-group' : true, 'has-feedback': true, 'has-success' : register_form.passw.$valid && register_form.passw.$dirty, 'has-error' : !register_form.passw.$valid && register_form.passw.$dirty}">
                                     <label for="respassw" class="control-label sr-only">Password</label>
-                                    <input type="password" class="form-control" ng-model="register.password" id="respassw" placeholder="Password">
+                                    <input ng-maxlength="30" type="password" class="form-control" ng-model="register.password" name="passw" id="passw" placeholder="Password" required>
+                                    <span ng-if="register_form.passw.$valid && register.password.length > 0" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    <span ng-if="!register_form.passw.$valid && register_form.passw.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 </div>
+
                                 <div class="form-group text-center">
-                                    <button type="submit" ng-click="registerUser()" class="btn btn-default">Register</button>
+                                    <a id="popover" tabindex="0" class="btn btn-default" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" ng-click="register_form.$valid && registerUser()" data-content="Validation problems detected! Please fix them before you proceed :) ">Register</a>
+                                    <!--<button type="submit" ng-click="registerUser()" class="btn btn-default">Register</button>-->
                                 </div>
                             </form>
                         </div>

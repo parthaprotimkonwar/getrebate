@@ -1,4 +1,4 @@
-rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http','$window','$location','broadcastService', 'commonServices','CONSTANTS', function($scope,$rootScope,$http,$window,$location,broadcastService,commonServices,CONSTANTS) {
+rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http','$window','$location','broadcastService', 'commonServices','CONSTANTS','$timeout', function($scope,$rootScope,$http,$window,$location,broadcastService,commonServices,CONSTANTS,$timeout) {
 
     //Handle condition when broadcast is empty
     /*if(broadcastService.isEmpty()) {
@@ -78,7 +78,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
     
     //REBATE User Register
     $scope.registerUser = function() {
-         
+        $('#popover').popover('hide');
          console.log('calling register user');
          var parameter = {
                 "userType" :"REBATE",
@@ -98,9 +98,30 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
              broadcastService.prepForBroadcastOfLoginAttributes(data.userDetails);
              $scope.dismiss();       //dismiss modal
          }).error(function (data, status, headers, config) {
-                console.log('AWS DOWN');
+             console.log(data);
+             $scope.registerError = true;
+             $scope.registerErrorMessage = data.errorMessages[0];
              
+             $timeout(function(){
+                 $scope.registerError = false;
+                 $scope.registerErrorMessage = "";
+             }, 6000);
          });
          
      }
+
+    /*$scope.validateRegistrationForm = function() {
+        var registrationData = $scope.register;
+        console.log("data :" + registrationData);
+
+
+    }*/
+
+
+    jQuery(document).ready(function($){
+        $('#popover').popover({
+            delay: 100
+        });
+    });
+
 }]);
