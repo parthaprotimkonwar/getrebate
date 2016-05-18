@@ -1,26 +1,14 @@
 .signup-or-seperator {
     position: relative;
-    //height: 34px;
+    height: 40px;
     text-align: center;
     background: none;
 }
 
-hr {
-    display: block;
-    -webkit-margin-before: 0.5em;
-    -webkit-margin-after: 0.5em;
-    -webkit-margin-start: auto;
-    -webkit-margin-end: auto;
-    border-style: inset;
-    border-width: 1px;
-}
-
-h6 {
-    display: block;
-    font-size: 0.67em;
-    -webkit-margin-before: 2.33em;
-    -webkit-margin-after: 2.33em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    font-weight: bold;
+.or-text {
+    z-index:1;
+    position: absolute;
+    left:42%;
+    background-color: white;
+    width:80px;
 }
