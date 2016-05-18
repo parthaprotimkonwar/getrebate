@@ -53,7 +53,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
     
     //REBATE User Login
     $scope.loginUser = function() {
-         
+         $('#login_popover').popover('hide');
          console.log('calling register user');
          var parameter = {
                 "userType" :"REBATE",
@@ -72,6 +72,13 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
              $scope.dismiss();       //dismiss modal
          }).error(function (data, status, headers, config) {
                 console.log('AWS DOWN');
+             $scope.loginError = true;
+             $scope.loginErrorMessage = data.errorMessages[0];
+
+             $timeout(function(){
+                 $scope.loginError = false;
+                 $scope.loginErrorMessage = "";
+             }, 6000);
          });
          
     }
@@ -120,6 +127,10 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
 
     jQuery(document).ready(function($){
         $('#popover').popover({
+            delay: 100
+        });
+
+        $('#login_popover').popover({
             delay: 100
         });
     });

@@ -78,19 +78,27 @@
                     </ul>
                     <div class="tab-content">
                         <div id="login" class="tab-pane active">
-                            <form class="form-block" role="form">
+                            <div ng-if="loginError" class="alert alert-danger fade in">
+                                <strong>Sorry!</strong> {{loginErrorMessage}}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            </div>
+                            <form name="login_form "class="form-block" role="form">
                                 
                                 <div class="text-center">
                                     <h2>I'm already a member</h2>
                                     <!--<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
                                 </div>
-                                <div class="form-group">
+                                <div ng-class="{'form-group' : true, 'has-feedback': true, 'has-success' : login_form.lemail.$valid && login_form.lemail.$dirty, 'has-error' : !login_form.lemail.$valid && login_form.lemail.$dirty}">
                                     <label for="lemail" class="control-label sr-only">Email</label>
-                                    <input type="email" ng-model="login.email" class="form-control" id="lemail" placeholder="Email">
+                                    <input type="email" ng-maxlength="30" name="lemail" ng-model="login.email" class="form-control" id="lemail" placeholder="Email" required="true">
+                                    <span ng-if="login_form.lemail.$valid && login.email.length > 0" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    <span ng-if="!login_form.lemail.$valid && login_form.lemail.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 </div>
-                                <div class="form-group">
+                                <div ng-class="{'form-group' : true, 'has-feedback': true, 'has-success' : login_form.lpassword.$valid && login_form.lpassword.$dirty, 'has-error' : !login_form.lpassword.$valid && login_form.lpassword.$dirty}">
                                     <label for="lpassword" class="control-label sr-only">Password</label>
-                                    <input type="password" ng-model="login.password" class="form-control" id="lpassword" placeholder="Password">
+                                    <input type="password" name="lpassword" ng-maxlength="30" ng-model="login.password" class="form-control" id="lpassword" placeholder="Password" required>
+                                    <span ng-if="login_form.lpassword.$valid && login.password.length > 0" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    <span ng-if="!login_form.lpassword.$valid && login_form.lpassword.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="checkbox">
@@ -99,7 +107,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
-                                    <button type="submit" ng-click="loginUser()" class="btn btn-default">Login</button>
+                                    <a id="login_popover" tabindex="0" class="btn btn-default" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" ng-click="login_form.$valid && loginUser()" data-content="Validation problems detected! Please fix them before you proceed :) ">Login</a>
+                                    <!--<button type="submit" ng-click="loginUser()" class="btn btn-default">Login</button>-->
                                 </div>
                             </form>
                             <div class="signup-or-seperator">
