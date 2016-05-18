@@ -118,15 +118,14 @@
                             <div>
                                 <div>
                                     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-
                                     <!--<div ng-click="signOut()"> Sign out</div>-->
                                 </div>
                             </div>
                             
                         </div>
                         <div id="register" class="tab-pane">
-                            <div ng-if="registerError" class="alert alert-danger fade in">
-                                <strong>Sorry!</strong> {{registerErrorMessage}}
+                            <div ng-if="register.registerError" class="alert alert-danger fade in">
+                                <strong>Sorry!</strong> {{register.registerErrorMessage}}
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             </div>
 
