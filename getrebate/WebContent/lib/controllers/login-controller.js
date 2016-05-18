@@ -68,6 +68,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
              broadcastService.prepForBroadcastOfLoginAttributes(data.userDetails);
              $scope.login = {};     //clear values
              $scope.dismiss();       //dismiss modal
+             $scope.login_form.$setPristine();
          }).error(function (data, status, headers, config) {
              console.log('AWS DOWN');
              $scope.loginError = true;
@@ -103,6 +104,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
              $scope.dismiss();       //dismiss modal
              //clear the values
              $scope.register = {};
+             $scope.register_form.$setPristine();
          }).error(function (data, status, headers, config) {
              console.log(data);
              $scope.register.registerError = true;
