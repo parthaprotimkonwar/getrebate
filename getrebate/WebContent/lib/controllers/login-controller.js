@@ -24,8 +24,6 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
         console.log('login controller : ' + $scope.loggedIn);
     }); 
 
-    
-    
     $scope.loginGooglePlusUser = function(userAttributes) {
         console.log('inside gplus');
         var profile = userAttributes.getBasicProfile();
@@ -39,16 +37,16 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
         console.log(parameter);
         $scope.loginUserPromise = commonServices.sendHttpRequest($scope.loginUserURL,CONSTANTS.POST_METHOD, parameter);
          
-         $scope.loginUserPromise.success(function (data, status, headers, config) {
+        $scope.loginUserPromise.success(function (data, status, headers, config) {
              broadcastService.prepForBroadcast(data.token);
              console.log('User Details : ' + data.userDetails);
              broadcastService.prepForBroadcastOfLoginAttributes(data.userDetails);
              console.log(data);
              $scope.dismiss();       //dismiss modal
              
-         }).error(function (data, status, headers, config) {
-                console.log('AWS DOWN');
-         });
+        }).error(function (data, status, headers, config) {
+             console.log('AWS DOWN');
+        });
     }
     
     //REBATE User Login
@@ -60,7 +58,6 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
                 "email" :  $scope.login.email,
                 "password" :  $scope.login.password
             };
-         //$scope.registerUser.add
          
          $scope.loginUserURL = CONSTANTS.LOGIN_URL;
          console.log(parameter);
@@ -72,7 +69,7 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
              $scope.login = {};     //clear values
              $scope.dismiss();       //dismiss modal
          }).error(function (data, status, headers, config) {
-                console.log('AWS DOWN');
+             console.log('AWS DOWN');
              $scope.loginError = true;
              $scope.loginErrorMessage = data.errorMessages[0];
 
@@ -94,7 +91,6 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
                 "email" :  $scope.register.email,
                 "password" :  $scope.register.password
             };
-         //$scope.registerUser.add
          
          $scope.registerUserURL = CONSTANTS.SIGNUP_URL;
          console.log(parameter);
@@ -119,14 +115,6 @@ rebateControllers.controller('loginController', ['$scope', '$rootScope', '$http'
 
          
      }
-
-    /*$scope.validateRegistrationForm = function() {
-        var registrationData = $scope.register;
-        console.log("data :" + registrationData);
-
-
-    }*/
-
 
     jQuery(document).ready(function($){
         $('#popover').popover({
