@@ -2,6 +2,7 @@ rebateControllers.controller('CompanyDescriptionController', ['$scope', '$http',
     
     $scope.CONSTANTS = CONSTANTS;
     $scope.loggedIn = broadcastService.token;
+    $location.hash('header');
     jQuery(document).ready(function($){
         $(".owl-carousel").owlCarousel();
     });

@@ -72,7 +72,10 @@ rebateControllers.factory('broadcastService', function($rootScope) {
 rebateControllers.controller('HomeController', ['$scope', '$http','$window','$location', function ($scope, $http,$window,$location) {
     
     jQuery(document).ready(function($){
-        $(".owl-carousel").owlCarousel();
+        //$(".owl-carousel").owlCarousel();
+        $('.carousel').carousel({
+           interval : 6000
+        });
     });
 }]);
 
